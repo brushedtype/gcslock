@@ -150,14 +150,19 @@ func New(ctx context.Context, bucket, object string) (ContextLocker, error) {
 	if ctx == nil {
 		ctx = context.Background()
 	}
+
 	client, err := httpClient(ctx)
 	if err != nil {
 		return nil, err
 	}
-	m := &mutex{
+
+	return NewWithClient(client, buckeet, object), nil
+}
+
+func NewWithClient(client *http.Client, bucket, object string) ContextLocker {
+	return &mutex{
 		bucket: bucket,
 		object: object,
 		client: client,
 	}
-	return m, nil
 }
