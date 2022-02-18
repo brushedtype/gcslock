@@ -156,7 +156,7 @@ func New(ctx context.Context, bucket, object string) (ContextLocker, error) {
 		return nil, err
 	}
 
-	return NewWithClient(client, buckeet, object), nil
+	return NewWithClient(client, bucket, object), nil
 }
 
 func NewWithClient(client *http.Client, bucket, object string) ContextLocker {
